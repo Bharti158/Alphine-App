@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="img/favicon.jpg" type="image/gif" sizes="16x16">
+	<!-- Library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="app.js"></script>
+	<!-- Controller -->
+	<script src="controller/reportCtrl.js"></script>
+	<style>
+		.highcharts-button {
+			display:none;
+		}
+		.highcharts-credits {
+			display:none;
+		}
+	</style>
+</head>
+
+<body ng-app="AlphineApp">
+	<div ng-controller = "annualReportCtrl">
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid"> 
+		  </div>
+		</nav>
+
+		<div class="container" ng-init="data">
+			<h3>Annual Result</h3>
+			<div class="table-data">
+				 <table class="table table-striped">
+				    <thead>
+				      <tr>
+				      	<th></th>
+				      	<th></th>
+				        <th ng-repeat="date in annualResult.date">{{date}}</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				      <tr ng-repeat = "data in annualResult.figure">
+				      	<td>
+				      		<input type="checkbox" ng-model="active" ng-change="selectRow(data,active)" />
+			      		</td>
+				        <td>{{data.name}}</td>
+				        <td ng-repeat="figure in data.data">{{figure}}</td>
+				      </tr>
+				      
+				    </tbody>
+				  </table>
+			</div>
+			<div id="chart" style="min-width: 310px; height: 600px; margin: 0 auto;" ng-show="chartAvailable">
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
